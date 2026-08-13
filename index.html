@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Método Importador — Aula ao Vivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0d0d;
+    --bg2:#161616;
+    --bg3:#1f1f1f;
+    --accent:#f5a623;
+    --accent2:#ff7a1a;
+    --white:#ffffff;
+    --text-sec:rgba(255,255,255,.65);
+    --text-faint:rgba(255,255,255,.4);
+    --border:rgba(255,255,255,.12);
+    --radius:10px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Poppins', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3,h4{font-weight:800;line-height:1.25;letter-spacing:-0.01em;}
+
+  .container{max-width:860px;margin:0 auto;padding:0 24px;}
+  .container-wide{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+  .section{padding:72px 0;}
+  .section-tight{padding:56px 0;}
+  .bg-alt{background:var(--bg2);}
+
+  .accent{color:var(--accent);}
+  .lead{color:var(--text-sec);font-size:17px;max-width:640px;}
+
+  /* Buttons */
+  .btn{
+    display:inline-block;
+    background:linear-gradient(90deg,#f9c04c,var(--accent) 55%,var(--accent2));
+    color:#151005;
+    font-weight:800;
+    font-size:16px;
+    padding:17px 34px;
+    border-radius:40px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    text-align:center;
+    font-family:inherit;
+    box-shadow:0 10px 30px rgba(245,166,35,.25);
+  }
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.05);}
+  .btn-wide{width:100%;display:block;}
+  .btn-center{text-align:center;}
+
+  /* Placeholders */
+  .placeholder{
+    border:1px dashed rgba(255,255,255,.25);
+    background:rgba(255,255,255,.03);
+    border-radius:14px;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    font-size:12px;font-weight:700;letter-spacing:.05em;
+    padding:20px;
+  }
+  .placeholder-on-white{
+    border:1px dashed rgba(0,0,0,.2);
+    background:rgba(0,0,0,.03);
+    color:rgba(0,0,0,.35);
+  }
+  .placeholder-hero{min-height:460px;border-radius:20px;}
+  .placeholder-proof{min-height:180px;}
+  .placeholder-lg{min-height:300px;}
+
+  /* HERO */
+  .hero{
+    padding:52px 0 76px;
+    background:
+      radial-gradient(circle at 85% 10%, rgba(245,166,35,.14), transparent 55%),
+      var(--bg);
+    position:relative;
+    overflow:hidden;
+  }
+  .logo{
+    display:flex;align-items:center;gap:8px;
+    font-weight:800;font-size:20px;letter-spacing:.02em;margin-bottom:36px;
+  }
+  .logo .mark{
+    width:26px;height:26px;border-radius:6px;
+    background:linear-gradient(135deg,#f9c04c,var(--accent2));
+    display:inline-block;
+  }
+  .hook{
+    font-size:18px;
+    font-weight:600;
+    color:var(--white);
+    margin-bottom:16px;
+  }
+  .hero h1{font-size:38px;margin-bottom:18px;}
+  .hero .subheadline{
+    font-size:20px;
+    font-weight:700;
+    color:var(--accent);
+    margin-bottom:18px;
+    line-height:1.4;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:48px;
+    align-items:center;
+    margin-top:8px;
+  }
+  .audience-line{
+    font-size:15px;
+    color:var(--text-sec);
+    font-weight:600;
+    margin:22px 0 26px;
+    padding:14px 16px;
+    background:rgba(245,166,35,.08);
+    border:1px solid rgba(245,166,35,.25);
+    border-radius:10px;
+  }
+  .logistics{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:30px;
+    font-size:14px;
+    color:var(--text-sec);
+    font-weight:600;
+  }
+  .logistics .badge{font-size:13px;}
+  .logistics .warn{color:var(--accent);}
+
+  /* Funnel comparison card (white) */
+  .white-card{
+    background:var(--white);
+    color:#111;
+    border-radius:20px;
+    padding:44px 40px;
+    max-width:920px;
+    margin:0 auto;
+    box-shadow:0 30px 60px rgba(0,0,0,.35);
+  }
+  .white-card h2{
+    color:#111;
+    font-size:26px;
+    text-align:center;
+    margin-bottom:36px;
+  }
+  .funnel-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+  }
+  .funnel-col{
+    text-align:center;
+  }
+  .funnel-col .funnel-title{
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:#111;
+    margin-bottom:18px;
+  }
+  .funnel-chain{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    margin-bottom:16px;
+  }
+  .funnel-chain li{
+    background:#f3f3f3;
+    border-radius:8px;
+    padding:9px 16px;
+    font-size:13px;
+    font-weight:600;
+    color:#333;
+    width:100%;
+    max-width:220px;
+  }
+  .funnel-col.direct .funnel-chain li{
+    background:linear-gradient(90deg,#fdeecb,#ffe0b3);
+    color:#7a4a05;
+    font-weight:700;
+  }
+  .funnel-arrow{color:#aaa;font-size:14px;}
+  .funnel-note{
+    font-size:12px;
+    color:#666;
+    margin-top:8px;
+    line-height:1.5;
+  }
+  .funnel-final-msg{
+    text-align:center;
+    font-size:16px;
+    font-weight:700;
+    color:#111;
+    margin-top:32px;
+    padding-top:28px;
+    border-top:1px solid #eee;
+  }
+  .funnel-final-msg span{color:var(--accent2);}
+
+  /* Proof grid */
+  .proof-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+  .proof-card{
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px;
+    text-align:center;
+  }
+  .proof-card .placeholder{margin-bottom:14px;}
+  .proof-card h4{font-size:15px;margin-bottom:6px;}
+  .proof-card p{font-size:13px;color:var(--accent);font-weight:600;}
+
+  /* Comparison table */
+  .compare-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .compare-box{
+    border-radius:16px;
+    padding:32px 28px;
+  }
+  .compare-box.bad{
+    background:var(--bg2);
+    border:1px solid var(--border);
+  }
+  .compare-box.good{
+    background:linear-gradient(160deg,#3a2a0c,#1f1706);
+    border:1px solid rgba(245,166,35,.35);
+  }
+  .compare-box h3{
+    font-size:16px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    margin-bottom:20px;
+  }
+  .compare-box.good h3{color:var(--accent);}
+  .compare-list{list-style:none;display:flex;flex-direction:column;gap:14px;}
+  .compare-list li{
+    display:flex;gap:10px;align-items:flex-start;
+    font-size:14px;color:var(--text-sec);
+  }
+  .compare-list .icon-x{color:#ef4444;font-weight:800;flex-shrink:0;}
+  .compare-list .icon-ok{color:var(--accent);font-weight:800;flex-shrink:0;}
+
+  /* Method flow */
+  .method-tag{
+    display:inline-block;
+    background:rgba(0,0,0,.06);
+    color:#7a4a05;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.05em;
+    padding:6px 14px;
+    border-radius:20px;
+    margin-bottom:18px;
+  }
+  .method-quote{
+    font-size:22px;
+    font-weight:700;
+    text-align:center;
+    color:#111;
+    max-width:640px;
+    margin:0 auto 32px;
+    line-height:1.4;
+  }
+  .flow-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:36px;
+  }
+  .flow-step{
+    background:#f3f3f3;
+    border-radius:10px;
+    padding:12px 18px;
+    font-size:13px;
+    font-weight:700;
+    color:#333;
+  }
+  .flow-sep{color:#bbb;font-weight:700;}
+
+  .icon-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+  }
+  .icon-card{
+    background:#f6f6f6;
+    border-radius:12px;
+    padding:20px 16px;
+    text-align:center;
+  }
+  .icon-card .emoji{font-size:22px;margin-bottom:10px;}
+  .icon-card p{font-size:13px;color:#333;font-weight:600;line-height:1.4;}
+
+  /* Numbered agenda */
+  .agenda-item{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:20px;
+    padding:26px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .agenda-item:last-child{border-bottom:none;}
+  .agenda-num{
+    font-size:26px;
+    font-weight:800;
+    color:var(--accent);
+    opacity:.85;
+  }
+  .agenda-item h4{font-size:16px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.02em;}
+  .agenda-item p{font-size:14px;color:var(--text-sec);}
+
+  /* Audience checklist */
+  .audience-list{list-style:none;display:flex;flex-direction:column;gap:14px;max-width:640px;margin:28px auto 0;}
+  .audience-list li{
+    display:flex;gap:12px;align-items:flex-start;
+    font-size:15px;color:var(--text-sec);
+  }
+  .audience-list .check{
+    color:var(--accent);font-weight:800;flex-shrink:0;
+  }
+
+  /* Mentor */
+  .mentor-grid{
+    display:grid;
+    grid-template-columns:.9fr 1.1fr;
+    gap:40px;
+    align-items:center;
+  }
+  .mentor-tag{
+    font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:10px;
+  }
+  .mentor-grid h2{font-size:26px;margin-bottom:16px;}
+  .mentor-grid p{color:var(--text-sec);font-size:15px;margin-bottom:14px;}
+  .mentor-flow{
+    font-size:13px;
+    font-weight:700;
+    color:var(--accent);
+    margin:18px 0 22px;
+    letter-spacing:.02em;
+  }
+  .stats-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin:28px 0;
+  }
+  .stat-card{
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px 14px;
+    text-align:center;
+  }
+  .stat-card .num{
+    font-size:22px;
+    font-weight:800;
+    color:var(--accent);
+    display:block;
+    margin-bottom:4px;
+  }
+  .stat-card .label{
+    font-size:12px;
+    color:var(--text-sec);
+  }
+
+  /* Final CTA */
+  .final-cta{
+    text-align:center;
+    padding:80px 0;
+    background:radial-gradient(circle at 50% 0%, rgba(245,166,35,.15), transparent 60%), var(--bg2);
+  }
+  .final-cta h2{font-size:30px;margin-bottom:16px;}
+  .final-cta p{color:var(--text-sec);margin-bottom:28px;}
+  .final-cta .btn{font-size:18px;padding:20px 42px;}
+
+  footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;}
+  footer p{color:var(--text-faint);font-size:12px;}
+
+  h2{font-size:28px;}
+
+  @media (max-width:700px){
+    .hero-grid{grid-template-columns:1fr;}
+    .funnel-grid{grid-template-columns:1fr;}
+    .proof-grid{grid-template-columns:1fr 1fr;}
+    .compare-grid{grid-template-columns:1fr;}
+    .icon-grid{grid-template-columns:1fr 1fr;}
+    .mentor-grid{grid-template-columns:1fr;}
+    .stats-row{grid-template-columns:1fr;}
+    .hero h1{font-size:28px;}
+    .white-card{padding:32px 22px;}
+    h2{font-size:22px;}
+    .section{padding:56px 0;}
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="container-wide">
+    <div class="logo"><span class="mark"></span> IMPORTADOR</div>
+    <div class="hero-grid">
+      <div>
+        <h1>Comprar de fornecedor nacional está <span class="accent">matando a sua margem.</span></h1>
+        <p class="subheadline">Descubra como importar direto da China e aumentar sua margem de lucro — sem depender de atravessadores.</p>
+        <p class="lead">Em uma aula prática, vou te mostrar o método que utilizo para encontrar produtos, validar demanda, negociar direto com fornecedores chineses e eliminar intermediários da sua cadeia de compra.</p>
+        <div class="audience-line">Para empresários que já vendem ou possuem capital para começar uma operação de importação.</div>
+        <div class="logistics">
+          <div>📅 <strong>[DATA]</strong> às <strong>[HORÁRIO]</strong></div>
+          <div>🎥 Encontro online e ao vivo</div>
+          <div class="warn">⚠️ Vagas limitadas</div>
+        </div>
+        <a href="#form" class="btn">Quero Participar Da Aula</a>
+      </div>
+      <div class="placeholder placeholder-hero">Foto Do Mentor</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. FUNNEL COMPARISON (white card) -->
+<section class="section">
+  <div class="container-wide">
+    <div class="white-card">
+      <h2>Sua margem está cada vez menor? Talvez o problema não esteja na venda. Está na compra.</h2>
+      <div class="funnel-grid">
+        <div class="funnel-col">
+          <div class="funnel-title">Quando Você Compra No Brasil</div>
+          <ul class="funnel-chain">
+            <li>Fábrica China</li>
+            <li class="funnel-arrow">↓</li>
+            <li>Trade</li>
+            <li class="funnel-arrow">↓</li>
+            <li>Importador</li>
+            <li class="funnel-arrow">↓</li>
+            <li>Distribuidor</li>
+            <li class="funnel-arrow">↓</li>
+            <li>Revendedor</li>
+            <li class="funnel-arrow">↓</li>
+            <li>Você</li>
+          </ul>
+          <p class="funnel-note">Cada camada adiciona: margem + imposto + operação.<br>No final você recebe o produto caro e ainda precisa disputar preço no Mercado Livre.</p>
+        </div>
+        <div class="funnel-col direct">
+          <div class="funnel-title">Importando Direto</div>
+          <ul class="funnel-chain">
+            <li>Fábrica China</li>
+            <li class="funnel-arrow">↓</li>
+            <li>Sua Empresa</li>
+            <li class="funnel-arrow">↓</li>
+            <li>Cliente</li>
+          </ul>
+        </div>
+      </div>
+      <p class="funnel-final-msg">Quanto <span>menos intermediários</span>, maior pode ser o espaço para margem.</p>
+    </div>
+    <div class="btn-center" style="margin-top:36px;">
+      <a href="#form" class="btn">Quero Participar Da Aula</a>
+    </div>
+  </div>
+</section>
+
+<!-- 3. PROOF -->
+<section class="section bg-alt">
+  <div class="container-wide">
+    <h2 style="text-align:center;margin-bottom:36px;">Veja quem já <span class="accent">aplicou o método</span>:</h2>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="placeholder placeholder-proof">Print De Resultado</div>
+        <h4>Joab</h4>
+        <p>Operação acima de R$3 milhões/ano</p>
+      </div>
+      <div class="proof-card">
+        <div class="placeholder placeholder-proof">Print De Resultado</div>
+        <h4>Andy</h4>
+        <p>~R$800 mil no primeiro ano</p>
+      </div>
+      <div class="proof-card">
+        <div class="placeholder placeholder-proof">Print De Resultado</div>
+        <h4>Welton</h4>
+        <p>Margem saiu de ~10% para 35%</p>
+      </div>
+      <div class="proof-card">
+        <div class="placeholder placeholder-proof">Print De Resultado</div>
+        <h4>Graziela</h4>
+        <p>Operação na faixa de R$40 mil/mês</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. COMPARISON TABLE -->
+<section class="section">
+  <div class="container-wide">
+    <h2 style="text-align:center;margin-bottom:36px;">E foi aí que eu percebi uma coisa:</h2>
+    <div class="compare-grid">
+      <div class="compare-box bad">
+        <h3>Comprando De Importadores</h3>
+        <ul class="compare-list">
+          <li><span class="icon-x">✕</span> Compra o produto já com a margem de outras empresas.</li>
+          <li><span class="icon-x">✕</span> Fica dependente do estoque do fornecedor nacional.</li>
+          <li><span class="icon-x">✕</span> Tem pouca margem para competir no preço.</li>
+          <li><span class="icon-x">✕</span> Produtos com muita concorrência.</li>
+          <li><span class="icon-x">✕</span> Muitas vezes vende mais, mas o lucro não acompanha.</li>
+        </ul>
+      </div>
+      <div class="compare-box good">
+        <h3>Importando Direto Da China</h3>
+        <ul class="compare-list">
+          <li><span class="icon-ok">✓</span> Negocia diretamente com fornecedores.</li>
+          <li><span class="icon-ok">✓</span> Consegue desenvolver sua própria cadeia de fornecimento.</li>
+          <li><span class="icon-ok">✓</span> Pode reduzir significativamente o custo de determinados produtos.</li>
+          <li><span class="icon-ok">✓</span> Passa a calcular a operação antes de comprar.</li>
+          <li><span class="icon-ok">✓</span> Cria mais espaço para margem, preço e escala.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="btn-center" style="margin-top:36px;">
+      <a href="#form" class="btn">Quero Aprender A Importar</a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. METHOD QUOTE + FLOW + ICON GRID (white card) -->
+<section class="section bg-alt">
+  <div class="container-wide">
+    <div class="white-card">
+      <div style="text-align:center;">
+        <span class="method-tag">O Método Importador</span>
+      </div>
+      <p class="method-quote">"Vou te ensinar a descobrir quanto custa nacionalizado antes de você decidir importar."</p>
+      <div class="flow-row">
+        <div class="flow-step">Produto</div>
+        <div class="flow-sep">→</div>
+        <div class="flow-step">Validação</div>
+        <div class="flow-sep">→</div>
+        <div class="flow-step">Fornecedor</div>
+        <div class="flow-sep">→</div>
+        <div class="flow-step">Importação</div>
+        <div class="flow-sep">→</div>
+        <div class="flow-step">Mercado Livre</div>
+      </div>
+      <div class="icon-grid">
+        <div class="icon-card"><div class="emoji">🚫</div><p>Sem depender de atravessadores para comprar.</p></div>
+        <div class="icon-card"><div class="emoji">✈️</div><p>Sem precisar viajar para a China.</p></div>
+        <div class="icon-card"><div class="emoji">📦</div><p>Sem comprar um container inteiro logo na primeira operação.</p></div>
+        <div class="icon-card"><div class="emoji">💸</div><p>Sem escolher produto apenas porque encontrou barato no Alibaba.</p></div>
+        <div class="icon-card"><div class="emoji">📊</div><p>Sem colocar dinheiro no estoque sem antes calcular os custos da operação.</p></div>
+        <div class="icon-card"><div class="emoji">🎲</div><p>Sem depender de "achismo" para escolher o produto.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. NUMBERED AGENDA -->
+<section class="section">
+  <div class="container">
+    <h2 style="text-align:center;margin-bottom:8px;">Nesta aula eu vou mostrar <span class="accent">ao vivo:</span></h2>
+    <div style="margin-top:32px;">
+      <div class="agenda-item">
+        <div class="agenda-num">01</div>
+        <div>
+          <h4>Como Encontrar Produtos</h4>
+          <p>Como encontrar produtos pequenos, leves e com potencial de margem sem simplesmente copiar "produto vencedor".</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">02</div>
+        <div>
+          <h4>Como Validar Demanda</h4>
+          <p>Como analisar Mercado Livre, concorrentes, volume de vendas e identificar se existe espaço real para entrar.</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">03</div>
+        <div>
+          <h4>Como Encontrar A Fábrica</h4>
+          <p>Como pesquisar no Alibaba, avaliar fornecedores e negociar diretamente.</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">04</div>
+        <div>
+          <h4>Como Saber Quanto Vai Custar</h4>
+          <p>Produto + frete + impostos + despacho + taxas = custo nacionalizado.</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">05</div>
+        <div>
+          <h4>Como Saber Se Vale A Pena</h4>
+          <p>Preço de venda − Mercado Livre − Ads − impostos − custo do produto = lucro e ROI estimados.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. AUDIENCE -->
+<section class="section bg-alt">
+  <div class="container">
+    <h2 style="text-align:center;">Esta aula não é para todo mundo.</h2>
+    <p style="text-align:center;color:var(--text-sec);margin-top:10px;">É para você que:</p>
+    <ul class="audience-list">
+      <li><span class="check">✓</span> já vende no Mercado Livre/e-commerce e quer melhorar sua margem;</li>
+      <li><span class="check">✓</span> possui loja, distribuição ou revenda e compra produtos de terceiros;</li>
+      <li><span class="check">✓</span> quer começar uma operação própria de importação;</li>
+      <li><span class="check">✓</span> possui CNPJ ou está estruturando uma empresa;</li>
+      <li><span class="check">✓</span> possui capital para estoque e entende que importação é um negócio, não uma promessa de dinheiro rápido.</li>
+    </ul>
+    <div class="btn-center" style="margin-top:32px;">
+      <a href="#form" class="btn">Quero Participar Da Aula</a>
+    </div>
+  </div>
+</section>
+
+<!-- 8. MENTOR -->
+<section class="section">
+  <div class="container-wide">
+    <div class="mentor-grid">
+      <div class="placeholder placeholder-lg">Foto Do Mentor</div>
+      <div>
+        <div class="mentor-tag">Quem Vai Conduzir A Aula?</div>
+        <h2>Jonatas</h2>
+        <p>Depois de começar revendendo produtos importados, construiu uma operação própria de importação e vendas no Mercado Livre.</p>
+        <p>Hoje utiliza o processo de:</p>
+        <div class="mentor-flow">Pesquisa de produto → Fornecedor → Negociação → Importação → Venda → Reposição</div>
+        <p>para operar produtos importados diretamente da China. Além da própria operação, acompanha empresários que querem deixar de depender de intermediários e construir sua própria cadeia de importação.</p>
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="num">R$15M+</span>
+            <span class="label">Importados</span>
+          </div>
+          <div class="stat-card">
+            <span class="num">1.000+</span>
+            <span class="label">Negociações com fornecedores chineses</span>
+          </div>
+          <div class="stat-card">
+            <span class="num">80+</span>
+            <span class="label">Empresários ajudados</span>
+          </div>
+        </div>
+        <a href="#form" class="btn">Quero Participar Da Aula</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. FINAL CTA -->
+<section class="final-cta" id="form">
+  <div class="container">
+    <h2>Pronto Para Importar Direto Da China?</h2>
+    <p>Garanta sua vaga na aula ao vivo — vagas limitadas.</p>
+    <a href="#form" class="btn">Quero Participar Da Aula</a>
+  </div>
+</section>
+
+<!-- 10. FOOTER -->
+<footer>
+  <div class="container">
+    <p>Jonatas © 2026 — Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+</body>
+</html>

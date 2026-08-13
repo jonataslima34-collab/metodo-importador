@@ -78,6 +78,11 @@
     padding:20px;
   }
   .placeholder-hero{min-height:460px;border-radius:20px;}
+  .hero-photo{
+    width:100%;min-height:460px;max-height:640px;object-fit:cover;
+    border-radius:20px;display:block;
+    box-shadow:0 30px 60px rgba(0,0,0,.35);
+  }
   .placeholder-lg{min-height:300px;}
 
   /* HERO */
@@ -261,6 +266,9 @@
     text-align:center;
   }
   .carousel-card .placeholder{min-height:170px;margin-bottom:14px;}
+  .carousel-card .proof-photo{
+    width:100%;height:170px;object-fit:cover;border-radius:10px;margin-bottom:14px;display:block;
+  }
   .carousel-card h4{font-size:15px;margin-bottom:6px;}
   .carousel-card p{font-size:13px;color:var(--accent);font-weight:600;}
   .carousel-nav{
@@ -370,7 +378,7 @@
         </div>
         <a href="javascript:void(0)" class="btn" onclick="Typebot.open()">Entrar No Grupo Agora</a>
       </div>
-      <div class="placeholder placeholder-hero">Foto Do Mentor</div>
+      <img src="img/mentor-hero.jpg" alt="Jonatas conferindo carga de importação" class="hero-photo">
     </div>
   </div>
 </section>
@@ -569,22 +577,22 @@
     <div class="carousel-wrap">
       <div class="carousel" id="proof-carousel">
         <div class="carousel-card">
-          <div class="placeholder">Print De Resultado</div>
+          <img src="img/joabe.jpg" alt="Joabe na importação" class="proof-photo">
           <h4>Joabe</h4>
           <p>Operação de ~R$3 milhões/ano</p>
         </div>
         <div class="carousel-card">
-          <div class="placeholder">Print De Resultado</div>
+          <img src="img/welton.jpg" alt="Welton na importação" class="proof-photo">
           <h4>Welton</h4>
           <p>Margem saiu de ~10% para 35%</p>
         </div>
         <div class="carousel-card">
-          <div class="placeholder">Print De Resultado</div>
+          <img src="img/andy.jpg" alt="Andy na importação" class="proof-photo">
           <h4>Andy</h4>
           <p>~R$800 mil no primeiro ano</p>
         </div>
         <div class="carousel-card">
-          <div class="placeholder">Print De Resultado</div>
+          <img src="img/graziela.jpg" alt="Importação da Graziela" class="proof-photo">
           <h4>Graziela</h4>
           <p>Operação na faixa de R$40 mil/mês</p>
         </div>

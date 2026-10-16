@@ -546,24 +546,13 @@
     font-size:12px;
     line-height:1.45;
   }
-  .hero-followup{
-    background:#111;
-    border-top:1px solid rgba(255,255,255,.10);
-    padding:34px 0;
-  }
-  .hero-followup p{
-    max-width:680px;
-    color:var(--text-sec);
-    font-size:16px;
-    line-height:1.65;
-  }
   @media(max-width:700px){
     .hero-header{min-height:62px;padding:10px 24px;gap:12px;}
     .hero-header .logo{font-size:12px;max-width:185px;gap:7px;}
     .hero-header .logo .mark{height:21px;width:21px;flex-shrink:0;}
     .hero-top-cta{font-size:11px;padding:11px 12px;}
-    /* Altura acompanha o conteúdo, evitando área vazia abaixo do capital */
-    .hero,.hero-inner{min-height:0;}
+    /* Primeira dobra: o hero ocupa a área visível abaixo do cabeçalho */
+    .hero,.hero-inner{min-height:calc(100svh - 62px);}
     .hero{background-position:60% center;}
     .hero-video{object-position:60% center;}
     .hero-video-overlay{
@@ -572,15 +561,14 @@
         linear-gradient(180deg,rgba(2,2,5,.35) 0%,rgba(2,2,5,.18) 40%,rgba(2,2,5,.90) 100%);
     }
     .hero-inner{justify-content:flex-start;}
-    .hero-content{padding:18px 0 30px;}
-    .hero-eyebrow{font-size:10px;margin-bottom:9px;letter-spacing:.055em;}
-    .hero h1{font-size:clamp(25px,7.1vw,31px);line-height:1.13;margin-bottom:13px;}
-    .hero .hero-sub{font-size:14.5px;line-height:1.44;}
-    .hero .hero-event{font-size:12px;line-height:1.4;gap:5px;margin:15px 0 16px;}
-    .hero-main-cta{display:block;width:100%;font-size:15px;padding:14px 18px;}
-    .hero .hero-capital{font-size:12px;margin-top:13px;}
-    .hero-followup{padding:28px 0;}
-    .hero-followup p{font-size:14px;line-height:1.65;}
+    /* Mais respiro entre os blocos, sem empurrar o CTA para fora da dobra */
+    .hero-content{padding:clamp(20px,3svh,28px) 0 clamp(28px,4svh,42px);}
+    .hero-eyebrow{font-size:10px;margin-bottom:clamp(12px,1.8svh,16px);letter-spacing:.055em;}
+    .hero h1{font-size:clamp(25px,7.1vw,31px);line-height:1.13;margin-bottom:clamp(19px,2.7svh,24px);}
+    .hero .hero-sub{font-size:14.5px;line-height:1.5;}
+    .hero .hero-event{font-size:12px;line-height:1.45;gap:10px;margin:clamp(22px,3svh,27px) 0 clamp(23px,3.2svh,29px);}
+    .hero .hero-main-cta{display:block;width:100%;font-size:15px;padding:16px 18px;}
+    .hero .hero-capital{font-size:12px;margin-top:clamp(20px,2.9svh,25px);}
   }
   @media(max-width:380px){
     .hero h1{font-size:25px;}
@@ -619,11 +607,6 @@
       <a href="javascript:void(0)" class="btn hero-main-cta" onclick="Typebot.open()">Entrar no grupo agora</a>
       <p class="hero-capital">Capital recomendado: a partir de R$ 30 mil</p>
     </div>
-  </div>
-</section>
-<section class="hero-followup">
-  <div class="container-wide">
-    <p>Descubra ao vivo as estratégias de importação que podem ajudar você a reduzir custos, aumentar suas margens e deixar de depender exclusivamente de fornecedores nacionais.</p>
   </div>
 </section>
 

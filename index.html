@@ -413,23 +413,57 @@
     .section{padding:56px 0;}
   }
 
-  /* HERO COM VÍDEO: visual premium sem alterar as demais seções */
+  /* Hero com fundo de vídeo, destaque em degradê e faixa preta acima do vídeo */
+  .site-hero-header{
+    position:relative;
+    z-index:5;
+    background:#050505;
+    border-bottom:1px solid rgba(255,255,255,.10);
+  }
+  .hero-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    min-height:76px;
+    padding:12px 0;
+  }
+  .hero-header .logo{
+    margin:0;
+    font-size:15px;
+    line-height:1.25;
+  }
+  .hero-top-cta{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    border-radius:40px;
+    background:var(--accent);
+    color:#151005;
+    padding:12px 21px;
+    font-size:13px;
+    font-weight:800;
+    line-height:1.2;
+    text-decoration:none;
+    white-space:nowrap;
+  }
   .hero{
     position:relative;
     isolation:isolate;
-    min-height:100svh;
-    padding:0;
+    min-height:calc(100svh - 76px);
     overflow:hidden;
-    background:#0d0d0d url('video/hero-poster.jpg') center/cover no-repeat;
+    padding:0;
+    background:#080808 url('video/hero-poster.jpg') 62% center / cover no-repeat;
   }
   .hero-video{
     position:absolute;
     inset:0;
+    z-index:-2;
     width:100%;
     height:100%;
     object-fit:cover;
-    object-position:center 42%;
-    z-index:-2;
+    object-position:60% center;
     pointer-events:none;
   }
   .hero-video-overlay{
@@ -438,88 +472,118 @@
     z-index:-1;
     pointer-events:none;
     background:
-      linear-gradient(90deg,rgba(7,7,7,.96) 0%,rgba(7,7,7,.85) 49%,rgba(7,7,7,.60) 100%),
-      linear-gradient(0deg,rgba(7,7,7,.72),transparent 40%);
+      linear-gradient(90deg,rgba(3,3,5,.98) 0%,rgba(3,3,5,.91) 35%,rgba(3,3,5,.65) 65%,rgba(3,3,5,.30) 100%),
+      linear-gradient(0deg,rgba(3,3,5,.78) 0%,rgba(3,3,5,.1) 55%,rgba(3,3,5,.40) 100%);
   }
-  .hero-inner{position:relative;z-index:1;}
-  .hero-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0;}
-  .hero-header .logo{margin:0;font-size:15px;line-height:1.25;}
-  .hero-top-cta{
-    flex-shrink:0;
-    display:inline-flex;
-    align-items:center;
+  .hero-inner{
+    position:relative;
+    z-index:1;
+    min-height:calc(100svh - 76px);
+    display:flex;
+    flex-direction:column;
     justify-content:center;
-    background:var(--accent);
-    color:#151005;
-    border-radius:100px;
-    padding:11px 20px;
-    font-size:13px;
-    font-weight:800;
-    line-height:1.25;
-    text-decoration:none;
   }
-  .hero-content{max-width:760px;padding:65px 0 76px;}
+  .hero-content{
+    max-width:650px;
+    padding:50px 0 54px;
+    text-shadow:0 3px 14px rgba(0,0,0,.45);
+  }
   .hero-eyebrow{
-    font-size:12px;
-    font-weight:800;
-    letter-spacing:.10em;
-    text-transform:uppercase;
     color:var(--accent);
-    margin-bottom:16px;
+    font-weight:800;
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    margin-bottom:15px;
   }
   .hero h1{
-    font-size:clamp(32px,4vw,50px);
-    line-height:1.15;
-    max-width:760px;
-    letter-spacing:-.03em;
-    margin-bottom:20px;
+    margin:0 0 18px;
+    max-width:650px;
+    font-size:clamp(34px,4.4vw,48px);
+    line-height:1.13;
+    letter-spacing:-.035em;
+    color:#fff;
+  }
+  .hero-gradient{
+    color:#8098ff;
+    background:linear-gradient(110deg,#a2bcff 0%,#728bff 42%,#4d68e9 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:none;
   }
   .hero .hero-sub{
-    font-size:19px;
-    font-weight:700;
-    line-height:1.5;
-    color:var(--white);
-    margin-bottom:16px;
-    max-width:720px;
+    max-width:620px;
+    color:rgba(255,255,255,.96);
+    font-size:18px;
+    font-weight:600;
+    line-height:1.50;
+    margin:0;
   }
-  .hero .hero-description{font-size:15px;line-height:1.65;max-width:650px;color:rgba(255,255,255,.88);}
-  .hero .hero-event{margin:22px 0 22px;font-size:14px;gap:7px;color:rgba(255,255,255,.88);}
+  .hero .hero-event{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    color:rgba(255,255,255,.88);
+    font-size:13px;
+    line-height:1.45;
+    margin:20px 0;
+  }
+  .hero .hero-event strong{color:#fff;}
+  .hero-main-cta{padding:16px 30px;}
   .hero .hero-capital{
-    max-width:490px;
     display:table;
-    margin-top:18px;
-    padding:12px 16px;
-    background:rgba(16,16,16,.70);
-    border:1px solid rgba(255,255,255,.2);
-    color:rgba(255,255,255,.83);
-    backdrop-filter:blur(4px);
+    max-width:100%;
+    margin-top:14px;
+    padding:0;
+    background:none;
+    border:0;
+    border-radius:0;
+    backdrop-filter:none;
+    color:rgba(255,255,255,.80);
+    font-size:12px;
+    line-height:1.45;
   }
-  .hero-main-cta{padding:17px 34px;}
-  @media (max-width:700px){
-    .hero{min-height:100svh;padding:0;background-position:center 35%;}
-    .hero-video{object-position:center 40%;}
+  .hero-followup{
+    background:#111;
+    border-top:1px solid rgba(255,255,255,.10);
+    padding:34px 0;
+  }
+  .hero-followup p{
+    max-width:680px;
+    color:var(--text-sec);
+    font-size:16px;
+    line-height:1.65;
+  }
+  @media(max-width:700px){
+    .hero-header{min-height:62px;padding:10px 0;gap:12px;}
+    .hero-header .logo{font-size:12px;max-width:185px;gap:7px;}
+    .hero-header .logo .mark{height:21px;width:21px;flex-shrink:0;}
+    .hero-top-cta{font-size:11px;padding:11px 12px;}
+    .hero,.hero-inner{min-height:calc(100svh - 62px);}
+    .hero{background-position:60% center;}
+    .hero-video{object-position:60% center;}
     .hero-video-overlay{
-      background:linear-gradient(180deg,rgba(5,5,5,.80) 0%,rgba(5,5,5,.78) 45%,rgba(5,5,5,.93) 100%);
+      background:
+        linear-gradient(90deg,rgba(2,2,5,.94) 0%,rgba(2,2,5,.82) 46%,rgba(2,2,5,.50) 100%),
+        linear-gradient(180deg,rgba(2,2,5,.35) 0%,rgba(2,2,5,.18) 40%,rgba(2,2,5,.90) 100%);
     }
-    .hero-header{padding:13px 0;}
-    .hero-header .logo{font-size:12px;max-width:190px;gap:7px;}
-    .hero-header .logo .mark{width:21px;height:21px;flex-shrink:0;}
-    .hero-top-cta{font-size:11px;padding:10px 12px;}
-    .hero-content{padding:30px 0 48px;}
-    .hero-eyebrow{font-size:10px;margin-bottom:12px;}
-    .hero h1{font-size:clamp(25px,7.2vw,31px);line-height:1.15;margin-bottom:12px;}
-    .hero .hero-sub{font-size:15px;line-height:1.43;margin-bottom:12px;}
-    .hero .hero-description{font-size:13.5px;line-height:1.52;}
-    .hero .hero-event{font-size:12px;gap:6px;margin:16px 0 17px;line-height:1.4;}
-    .hero-main-cta{display:block;width:100%;padding:14px 18px;font-size:15px;}
-    .hero .hero-capital{font-size:12px;max-width:100%;margin-top:13px;padding:10px 12px;}
+    .hero-content{padding:24px 0 30px;}
+    .hero-eyebrow{font-size:10px;margin-bottom:12px;letter-spacing:.055em;}
+    .hero h1{font-size:clamp(25px,7.1vw,31px);line-height:1.13;margin-bottom:13px;}
+    .hero .hero-sub{font-size:14.5px;line-height:1.44;}
+    .hero .hero-event{font-size:12px;line-height:1.4;gap:5px;margin:15px 0 16px;}
+    .hero-main-cta{display:block;width:100%;font-size:15px;padding:14px 18px;}
+    .hero .hero-capital{font-size:12px;margin-top:13px;}
+    .hero-followup{padding:28px 0;}
+    .hero-followup p{font-size:14px;line-height:1.65;}
   }
-  @media (max-width:380px){
+  @media(max-width:380px){
     .hero h1{font-size:25px;}
     .hero .hero-sub{font-size:14px;}
-    .hero .hero-description{font-size:13px;}
+    .hero .hero-event{font-size:11.5px;}
   }
-  @media (prefers-reduced-motion:reduce){
+  @media(prefers-reduced-motion:reduce){
     .hero-video{display:none;}
   }
 
@@ -528,28 +592,34 @@
 <body>
 
 <!-- 1. HERO -->
+<header class="site-hero-header">
+  <div class="container-wide hero-header">
+    <div class="logo"><span class="mark"></span> FÓRMULA DA IMPORTAÇÃO</div>
+    <a href="javascript:void(0)" class="hero-top-cta" onclick="Typebot.open()">Quero participar</a>
+  </div>
+</header>
 <section class="hero">
   <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="video/hero-poster.jpg" aria-hidden="true">
     <source src="video/hero-background.mp4" type="video/mp4">
   </video>
   <div class="hero-video-overlay" aria-hidden="true"></div>
   <div class="container-wide hero-inner">
-    <header class="hero-header">
-      <div class="logo"><span class="mark"></span> FÓRMULA DA IMPORTAÇÃO</div>
-      <a href="javascript:void(0)" class="hero-top-cta" onclick="Typebot.open()">Quero participar</a>
-    </header>
     <div class="hero-content">
       <div class="hero-eyebrow">AULA GRATUITA AO VIVO • 19 DE OUTUBRO</div>
-      <h1>Você vende no e-commerce mas sua margem de lucro é baixa?</h1>
+      <h1>Você vende no e-commerce mas sua <span class="hero-gradient">margem de lucro é baixa?</span></h1>
       <p class="hero-sub">Importar não é apenas comprar mais barato na China. É construir uma operação lucrativa, com margem, estrutura e planejamento.</p>
-      <p class="hero-description">Descubra ao vivo as estratégias de importação que podem ajudar você a reduzir custos, aumentar suas margens e deixar de depender exclusivamente de fornecedores nacionais.</p>
       <div class="hero-event">
         <div>📅 <strong>Segunda-feira, 19 de outubro, às 19h</strong></div>
         <div>💻 <strong>Ao vivo pelo Google Meet | Apenas 50 vagas</strong></div>
       </div>
       <a href="javascript:void(0)" class="btn hero-main-cta" onclick="Typebot.open()">Entrar no grupo agora</a>
-      <div class="hero-capital">Capital recomendado: a partir de R$ 30 mil</div>
+      <p class="hero-capital">Capital recomendado: a partir de R$ 30 mil</p>
     </div>
+  </div>
+</section>
+<section class="hero-followup">
+  <div class="container-wide">
+    <p>Descubra ao vivo as estratégias de importação que podem ajudar você a reduzir custos, aumentar suas margens e deixar de depender exclusivamente de fornecedores nacionais.</p>
   </div>
 </section>
 

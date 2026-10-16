@@ -107,14 +107,40 @@
     background:linear-gradient(135deg,#f9c04c,var(--accent2));
     display:inline-block;
   }
-  .hero h1{font-size:44px;margin-bottom:20px;}
+  .hero h1{font-size:40px;line-height:1.18;margin-bottom:18px;}
   .hero-sub{
-    font-size:22px;
-    font-weight:500;
+    font-size:19px;
+    font-weight:700;
+    color:var(--white);
+    line-height:1.45;
+    max-width:650px;
+    margin-bottom:16px;
+  }
+  .hero-description{
+    font-size:16px;
     color:var(--text-sec);
+    line-height:1.6;
+    max-width:620px;
+  }
+  .hero-event{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin:20px 0 22px;
+    font-size:14px;
     line-height:1.5;
-    max-width:560px;
-    margin-bottom:28px;
+    color:var(--text-sec);
+  }
+  .hero-event strong{color:var(--white);}
+  .hero-capital{
+    margin-top:18px;
+    padding:12px 16px;
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    color:var(--text-sec);
+    font-size:13px;
+    line-height:1.5;
   }
   .hero-grid{
     display:grid;
@@ -364,35 +390,165 @@
     .case-split{grid-template-columns:1fr;}
     .mentor-grid{grid-template-columns:1fr;}
     .stats-row{grid-template-columns:repeat(2,1fr);}
-    .hero h1{font-size:30px;}
-    .hero-sub{font-size:18px;}
+    .hero{padding:20px 0 46px;}
+    .logo{font-size:14px;margin-bottom:16px;}
+    .logo .mark{width:22px;height:22px;}
+    .hero-grid{gap:24px;margin-top:0;}
+    .hero h1{font-size:27px;line-height:1.14;margin-bottom:11px;letter-spacing:-.025em;}
+    .hero-sub{font-size:15px;line-height:1.38;margin-bottom:10px;}
+    .hero-description{font-size:14px;line-height:1.46;}
+    .hero-event{font-size:12.5px;line-height:1.38;gap:6px;margin:12px 0 14px;}
+    .hero .btn{display:block;width:100%;padding:14px 18px;font-size:14px;}
+    .hero-capital{margin-top:12px;padding:10px 12px;font-size:12px;}
+    .hero-photo{min-height:0;max-height:none;aspect-ratio:4/3;}
+  }
+  @media (max-width:380px){
+    .hero h1{font-size:25px;}
+    .hero-sub{font-size:14.5px;}
+    .hero-description{font-size:13.5px;}
+  }
+  @media (max-width:700px){
     .white-card{padding:30px 20px;}
     h2{font-size:22px;}
     .section{padding:56px 0;}
   }
+
+  /* HERO COM VÍDEO: visual premium sem alterar as demais seções */
+  .hero{
+    position:relative;
+    isolation:isolate;
+    min-height:100svh;
+    padding:0;
+    overflow:hidden;
+    background:#0d0d0d url('video/hero-poster.jpg') center/cover no-repeat;
+  }
+  .hero-video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 42%;
+    z-index:-2;
+    pointer-events:none;
+  }
+  .hero-video-overlay{
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background:
+      linear-gradient(90deg,rgba(7,7,7,.96) 0%,rgba(7,7,7,.85) 49%,rgba(7,7,7,.60) 100%),
+      linear-gradient(0deg,rgba(7,7,7,.72),transparent 40%);
+  }
+  .hero-inner{position:relative;z-index:1;}
+  .hero-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0;}
+  .hero-header .logo{margin:0;font-size:15px;line-height:1.25;}
+  .hero-top-cta{
+    flex-shrink:0;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--accent);
+    color:#151005;
+    border-radius:100px;
+    padding:11px 20px;
+    font-size:13px;
+    font-weight:800;
+    line-height:1.25;
+    text-decoration:none;
+  }
+  .hero-content{max-width:760px;padding:65px 0 76px;}
+  .hero-eyebrow{
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.10em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:16px;
+  }
+  .hero h1{
+    font-size:clamp(32px,4vw,50px);
+    line-height:1.15;
+    max-width:760px;
+    letter-spacing:-.03em;
+    margin-bottom:20px;
+  }
+  .hero .hero-sub{
+    font-size:19px;
+    font-weight:700;
+    line-height:1.5;
+    color:var(--white);
+    margin-bottom:16px;
+    max-width:720px;
+  }
+  .hero .hero-description{font-size:15px;line-height:1.65;max-width:650px;color:rgba(255,255,255,.88);}
+  .hero .hero-event{margin:22px 0 22px;font-size:14px;gap:7px;color:rgba(255,255,255,.88);}
+  .hero .hero-capital{
+    max-width:490px;
+    display:table;
+    margin-top:18px;
+    padding:12px 16px;
+    background:rgba(16,16,16,.70);
+    border:1px solid rgba(255,255,255,.2);
+    color:rgba(255,255,255,.83);
+    backdrop-filter:blur(4px);
+  }
+  .hero-main-cta{padding:17px 34px;}
+  @media (max-width:700px){
+    .hero{min-height:100svh;padding:0;background-position:center 35%;}
+    .hero-video{object-position:center 40%;}
+    .hero-video-overlay{
+      background:linear-gradient(180deg,rgba(5,5,5,.80) 0%,rgba(5,5,5,.78) 45%,rgba(5,5,5,.93) 100%);
+    }
+    .hero-header{padding:13px 0;}
+    .hero-header .logo{font-size:12px;max-width:190px;gap:7px;}
+    .hero-header .logo .mark{width:21px;height:21px;flex-shrink:0;}
+    .hero-top-cta{font-size:11px;padding:10px 12px;}
+    .hero-content{padding:30px 0 48px;}
+    .hero-eyebrow{font-size:10px;margin-bottom:12px;}
+    .hero h1{font-size:clamp(25px,7.2vw,31px);line-height:1.15;margin-bottom:12px;}
+    .hero .hero-sub{font-size:15px;line-height:1.43;margin-bottom:12px;}
+    .hero .hero-description{font-size:13.5px;line-height:1.52;}
+    .hero .hero-event{font-size:12px;gap:6px;margin:16px 0 17px;line-height:1.4;}
+    .hero-main-cta{display:block;width:100%;padding:14px 18px;font-size:15px;}
+    .hero .hero-capital{font-size:12px;max-width:100%;margin-top:13px;padding:10px 12px;}
+  }
+  @media (max-width:380px){
+    .hero h1{font-size:25px;}
+    .hero .hero-sub{font-size:14px;}
+    .hero .hero-description{font-size:13px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .hero-video{display:none;}
+  }
+
 </style>
 </head>
 <body>
 
 <!-- 1. HERO -->
 <section class="hero">
-  <div class="container-wide">
-    <div class="logo"><span class="mark"></span> FÓRMULA DA IMPORTAÇÃO</div>
-    <div class="hero-grid">
-      <div>
-        <h3>Você vende no e-commerce mas sua margem de lucro é baixa ?</h3>
-        <p class="hero-sub">Importe sem intermediários, com retorno de <span class="accent">70% a 100%</span> em até 90 dias — mesmo que você nunca tenha importado antes.</p>
-        <div class="capital-line">
-          <div class="big">Capital recomendado: a partir de aproximadamente R$ 30 mil</div>
-          <div class="sub">Valor destinado à mercadoria, frete, impostos, logística e demais custos da operação de importação.</div>
-        </div>
-        <div class="logistics">
-          <div>📅 No dia <strong>19 de Outubro (Segunda-feira)</strong>, às <strong>19:00h</strong> — Horário de Brasília</div>
-          <div>💻 Encontro exclusivo no Meet, vagas limitadas para <strong>50 pessoas</strong></div>
-        </div>
-        <a href="javascript:void(0)" class="btn" onclick="Typebot.open()">Entrar No Grupo Agora</a>
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="video/hero-poster.jpg" aria-hidden="true">
+    <source src="video/hero-background.mp4" type="video/mp4">
+  </video>
+  <div class="hero-video-overlay" aria-hidden="true"></div>
+  <div class="container-wide hero-inner">
+    <header class="hero-header">
+      <div class="logo"><span class="mark"></span> FÓRMULA DA IMPORTAÇÃO</div>
+      <a href="javascript:void(0)" class="hero-top-cta" onclick="Typebot.open()">Quero participar</a>
+    </header>
+    <div class="hero-content">
+      <div class="hero-eyebrow">AULA GRATUITA AO VIVO • 19 DE OUTUBRO</div>
+      <h1>Você vende no e-commerce mas sua margem de lucro é baixa?</h1>
+      <p class="hero-sub">Importar não é apenas comprar mais barato na China. É construir uma operação lucrativa, com margem, estrutura e planejamento.</p>
+      <p class="hero-description">Descubra ao vivo as estratégias de importação que podem ajudar você a reduzir custos, aumentar suas margens e deixar de depender exclusivamente de fornecedores nacionais.</p>
+      <div class="hero-event">
+        <div>📅 <strong>Segunda-feira, 19 de outubro, às 19h</strong></div>
+        <div>💻 <strong>Ao vivo pelo Google Meet | Apenas 50 vagas</strong></div>
       </div>
-      <img src="img/mentor-hero.jpg" alt="Jonatas conferindo carga de importação" class="hero-photo">
+      <a href="javascript:void(0)" class="btn hero-main-cta" onclick="Typebot.open()">Entrar no grupo agora</a>
+      <div class="hero-capital">Capital recomendado: a partir de R$ 30 mil</div>
     </div>
   </div>
 </section>

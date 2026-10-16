@@ -426,7 +426,7 @@
     justify-content:space-between;
     gap:16px;
     min-height:76px;
-    padding:12px 0;
+    padding:12px 24px;
   }
   .hero-header .logo{
     margin:0;
@@ -558,11 +558,12 @@
     line-height:1.65;
   }
   @media(max-width:700px){
-    .hero-header{min-height:62px;padding:10px 0;gap:12px;}
+    .hero-header{min-height:62px;padding:10px 24px;gap:12px;}
     .hero-header .logo{font-size:12px;max-width:185px;gap:7px;}
     .hero-header .logo .mark{height:21px;width:21px;flex-shrink:0;}
     .hero-top-cta{font-size:11px;padding:11px 12px;}
-    .hero,.hero-inner{min-height:calc(100svh - 62px);}
+    /* Altura acompanha o conteúdo, evitando área vazia abaixo do capital */
+    .hero,.hero-inner{min-height:0;}
     .hero{background-position:60% center;}
     .hero-video{object-position:60% center;}
     .hero-video-overlay{

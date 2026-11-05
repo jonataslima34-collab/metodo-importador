@@ -941,6 +941,24 @@
       chatWindow: { backgroundColor: "#0d0d0d" },
     },
   });
+  
+  // O Typebot usa uma janela de 80vh por padrão.
+  // Em celulares, limitamos a altura para reduzir o espaço vazio
+  // sem alterar o tamanho do popup no desktop.
+  const typebotPopup = document.querySelector("typebot-popup");
+  if (typebotPopup?.shadowRoot) {
+    const mobilePopupStyle = document.createElement("style");
+    mobilePopupStyle.textContent = `
+      @media (max-width: 700px) {
+        [role="dialog"] [class~="h-[80vh]"] {
+          height: 65vh !important;
+          height: min(520px, 65dvh) !important;
+          max-height: calc(100dvh - 24px);
+        }
+      }
+    `;
+    typebotPopup.shadowRoot.appendChild(mobilePopupStyle);
+  }
 </script>
 
 </body>
